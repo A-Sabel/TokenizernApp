@@ -52,7 +52,7 @@ public class SymbolTable {
         return instance;
     }
 
-    public boolean isKeyword(String lexeme) { return KEYWORDS.contains(lexeme.toLowerCase()); }
+    public boolean isKeyword(String lexeme) { return KEYWORDS.contains(lexeme); }
     public void registerIdentifier(String lexeme) {
         if (!isKeyword(lexeme)) {
             identifierCounts.put(lexeme, identifierCounts.getOrDefault(lexeme, 0) + 1);

@@ -39,8 +39,20 @@ public class Lexer {
     }
 
     public List<Tokens> tokenize() {
+        ErrorHandler.clear();
+        SymbolTable.getInstance().reset();
         while (pos < sourceCode.length()) {
             char current = sourceCode.charAt(pos);
+
+            // Handle Comments
+            if (current == '/' && peek() == '/') {
+                skipSingleLineComment();
+                continue;
+            } 
+            else if (current == '/' && peek() == '*') {
+                skipMultiLineComment();
+                continue;
+            }
 
             // State S: Handle Whitespace & Newlines
             if(CharMatcher.isWhitespace(current)) {
@@ -55,7 +67,7 @@ public class Lexer {
             else if (CharMatcher.isOperator(current)) { processOperator(); } // State 10, 11, 14
             else if (CharMatcher.isPunctuation(current)) { processPunctuation(); } // State 13
             else if (CharMatcher.isSpecialSymbol(current)) {
-                addToken(Character.toString(current), "SPECIAL_CHAR");
+                tokens.add(TokenFactory.createToken(Character.toString(current), "SPECIAL_CHAR", line, col));
                 advance();
             }
             else {
@@ -77,11 +89,36 @@ public class Lexer {
         pos++;
     }
 
-    private void addToken(String lexeme, String category) {
-        tokens.add(TokenFactory.createToken(lexeme, category, line, col - lexeme.length()));
-        if (category.equals("IDENTIFIER")) {
-            SymbolTable.getInstance().registerIdentifier(lexeme);
+    // Handles: // This is a comment
+    private void skipSingleLineComment() {
+        while (pos < sourceCode.length() && sourceCode.charAt(pos) != '\n') {
+            advance();
         }
+    }
+
+    // Handles: /* This is a 
+    //             multi-line comment */
+    private void skipMultiLineComment() {
+        advance(); // Consume the '/'
+        advance(); // Consume the '*'
+        while (pos < sourceCode.length()) {
+            char current = sourceCode.charAt(pos);
+            // Check for the closing "*/"
+            if (current == '*' && peek() == '/') {
+                advance(); // Consume the '*'
+                advance(); // Consume the '/'
+                return;
+            }
+            // We must manually track newlines inside block comments
+            if (current == '\n') {
+                line++;
+                col = 1;
+                pos++;
+            } else {
+                advance();
+            }
+        }
+        ErrorHandler.report("Unterminated multi-line comment", line, col);
     }
 
     private void advance() {
