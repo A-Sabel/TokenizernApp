@@ -1,4 +1,4 @@
-## **Week 1: The Building Blocks**
+## **The Building Blocks**
 **Goal:** Establish the data models and the basic UI shell.
 
 | **Team A: Backend & Utils** | **Team B: Frontend** |
@@ -10,7 +10,7 @@
 
 ---
 
-## **Week 2: The Logic Engine**
+## **The Logic Engine**
 **Goal:** Get the scanner running and connect it to the interface.
 
 | **Team A: Backend & Utils** | **Team B: Frontend** |
@@ -22,7 +22,7 @@
 
 ---
 
-## **Week 3: Polish & Error Handling**
+## **Polish & Error Handling**
 **Goal:** Handle the "messy" parts of coding and make the UI look professional.
 
 | **Team A: Backend & Utils** | **Team B: Frontend** |
