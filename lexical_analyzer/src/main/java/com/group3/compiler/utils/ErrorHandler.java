@@ -6,5 +6,9 @@ Member Note: "Collect errors in an ArrayList so the GUI can display a full repor
     at the end of the tokenization process." */
 
 public class ErrorHandler {
-    
+    public static void report(String message, int line, int col) {
+        // For now, simply print to the standard error stream.
+        // Later, your Frontend Team can redirect this to the GUI.
+        System.err.println("[Lexical Error] Line " + line + ", Col " + col + ": " + message);
+    }
 }
