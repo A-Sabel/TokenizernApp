@@ -37,6 +37,7 @@ public class SymbolTable {
     ));
 
     // Key = Lexeme (Identifier), Value = Count of Occurrences
+    @SuppressWarnings("FieldMayBeFinal")
     private HashMap<String, Integer> identifierCounts;
     // Private Constructor
     private SymbolTable() { identifierCounts = new HashMap<>();}
