@@ -5,6 +5,10 @@ Description: Represents reserved words inherent to the language (e.g., int, if, 
 Member Note: "Compare lexemes against the predefined keyword array in SymbolTable 
     before assigning this type." */
 
-public class Keyword {
+public class Keyword extends Tokens {
+    // Constructor
+    public Keyword(String lexeme, int line, int column) {
+        super(lexeme, "KEYWORD", line, column);
+    }
     
 }

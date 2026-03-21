@@ -5,6 +5,10 @@ Description: Represents grouping symbols or special notations ( (, ), {, }, [, ]
 Member Note: "These help define code blocks. Categorize them separately from 
     math operators for cleaner parsing later." */
 
-public class SpecialChar {
+public class SpecialChar extends Tokens {
+    // Constructor
+    public SpecialChar(String lexeme, int line, int column) {
+        super(lexeme, "SPECIAL_CHAR", line, column);
+    }
     
 }
