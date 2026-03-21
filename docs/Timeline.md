@@ -1,9 +1,3 @@
-Since you’ve already established the class structure, your teams can work in parallel. The key to a successful 2-team split is the **Interface Contract**: Team B (Frontend) needs to know exactly what the `List<Tokens>` from Team A (Backend) will look like so they can display it properly.
-
-Here is your 3-week sprint plan for a 3–4 day work week.
-
----
-
 ## **Week 1: The Building Blocks**
 **Goal:** Establish the data models and the basic UI shell.
 
