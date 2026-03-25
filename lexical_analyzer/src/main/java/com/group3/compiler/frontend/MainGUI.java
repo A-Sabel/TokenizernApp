@@ -1,5 +1,7 @@
 package com.group3.compiler.frontend;
 
+import javax.swing.JTextArea;
+
 /* VIEW CLASS: Main Application Window
 Description: The primary JFrame holding the Input, Output, and Stats panels.
 Member Note: "Integrate the 'Tokenize' button listener here. It bridges the 
@@ -18,16 +20,70 @@ public class MainGUI extends javax.swing.JFrame {
         CodeInputArea.setBackground(new java.awt.Color(245, 247, 252));
         CodeInputArea.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
+        // Line numbers
+        JTextArea lineNumbers = createLineNumberArea(CodeInputArea);
+
+        // Scroll pane with line numbers on the left
         javax.swing.JScrollPane scroll = new javax.swing.JScrollPane(CodeInputArea);
+        scroll.setRowHeaderView(lineNumbers); // <-- add line numbers here
         scroll.setBorder(null);
-        scroll.setPreferredSize(new java.awt.Dimension(1050, 600)); 
-        
+        scroll.setPreferredSize(new java.awt.Dimension(1050, 600));
+
         LS_Editor.setLayout(new java.awt.BorderLayout());
         LS_Editor.add(scroll, java.awt.BorderLayout.CENTER);
         LS_Editor.revalidate();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
+
+    private JTextArea createLineNumberArea(JTextArea textArea) {
+        JTextArea lineNumbers = new JTextArea();
+    
+        // Style
+        lineNumbers.setBackground(new java.awt.Color(220, 225, 235));
+        lineNumbers.setEditable(false);
+        lineNumbers.setFont(new java.awt.Font("Monospaced", textArea.getFont().getStyle(), textArea.getFont().getSize()));
+        lineNumbers.setForeground(new java.awt.Color(100, 100, 100));
+        lineNumbers.setColumns(4); // enough width for numbers
+    
+        // Remove caret (cursor)
+        lineNumbers.setCaretColor(lineNumbers.getBackground());
+    
+        // Method to update line numbers
+        Runnable update = () -> {
+            int totalLines = textArea.getLineCount();
+    
+            // Always show at least 1
+            if (totalLines == 0) totalLines = 1;
+    
+            StringBuilder sb = new StringBuilder();
+            for (int i = 1; i <= totalLines; i++) {
+                sb.append(i).append(System.lineSeparator());
+            }
+            lineNumbers.setText(sb.toString());
+        };
+    
+        // Update line numbers when text changes
+        textArea.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override public void insertUpdate(javax.swing.event.DocumentEvent e) { update.run(); }
+            @Override public void removeUpdate(javax.swing.event.DocumentEvent e) { update.run(); }
+            @Override public void changedUpdate(javax.swing.event.DocumentEvent e) { update.run(); }
+        });
+    
+        // Update line numbers on resize
+        textArea.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent e) {
+                update.run();
+            }
+        });
+    
+        // Make sure numbers are initially correct
+        javax.swing.SwingUtilities.invokeLater(update);
+    
+        return lineNumbers;
+    }
+
     private void initComponents() {
 
         MainPanel             = new javax.swing.JPanel();
