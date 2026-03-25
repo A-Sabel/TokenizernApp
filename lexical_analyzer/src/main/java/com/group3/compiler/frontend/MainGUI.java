@@ -6,7 +6,7 @@ Member Note: "Integrate the 'Tokenize' button listener here. It bridges the
     JTextArea input to the Lexer backend." */
 
 public class MainGUI extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainGUI.class.getName());
 
     public MainGUI() {
@@ -14,42 +14,65 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
-        MainPanel = new javax.swing.JPanel();
-        TopPanel = new javax.swing.JPanel();
-        Import = new javax.swing.JLabel();
-        Tokenize = new javax.swing.JLabel();
-        Clear = new javax.swing.JLabel();
-        BottomSection = new javax.swing.JTabbedPane();
-        TokenTableTab = new javax.swing.JPanel();
+        MainPanel             = new javax.swing.JPanel();
+        TopPanel              = new javax.swing.JPanel();
+        Import                = new javax.swing.JButton();   // was JLabel
+        Tokenize              = new javax.swing.JButton();   // was JLabel
+        Clear                 = new javax.swing.JButton();   // was JLabel
+        BottomSection         = new javax.swing.JTabbedPane();
+        TokenTableTab         = new javax.swing.JPanel();
         LexemeTableScrollPane = new javax.swing.JScrollPane();
-        LexemeTable = new javax.swing.JTable();
+        LexemeTable           = new javax.swing.JTable();
         UniqueTableScrollPane = new javax.swing.JScrollPane();
-        UniqueTable = new javax.swing.JTable();
-        SymbolTableTab = new javax.swing.JTabbedPane();
-        OutputArea = new javax.swing.JButton();
-        LS_Editor = new javax.swing.JPanel();
-        RS_Tokens = new javax.swing.JPanel();
-        RS_Unique = new javax.swing.JPanel();
-        RS_Error = new javax.swing.JPanel();
+        UniqueTable           = new javax.swing.JTable();
+        SymbolTableTab        = new javax.swing.JTabbedPane();
+        OutputArea            = new javax.swing.JButton();
+        LS_Editor             = new javax.swing.JPanel();
+        RS_Tokens             = new javax.swing.JPanel();
+        RS_Unique             = new javax.swing.JPanel();
+        RS_Error              = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MainPanel.setBackground(new java.awt.Color(72, 83, 97));
+        // ── Main panel: slate-blue body ──────────────────────────────────────
+        MainPanel.setBackground(new java.awt.Color(107, 122, 141));   // #6B7A8D
 
-        TopPanel.setBackground(new java.awt.Color(155, 161, 172));
+        // ── Top bar: darker slate ────────────────────────────────────────────
+        TopPanel.setBackground(new java.awt.Color(90, 106, 126));     // #5A6A7E
         TopPanel.setPreferredSize(new java.awt.Dimension(1920, 70));
 
-        Import.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 18)); // NOI18N
-        Import.setText("Import File");
+        // ── Import button ────────────────────────────────────────────────────
+        Import.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 14));
+        Import.setText("  Import File");
+        Import.setForeground(java.awt.Color.WHITE);
+        Import.setBackground(new java.awt.Color(74, 111, 165));
+        Import.setFocusPainted(false);
+        Import.setBorderPainted(false);
+        Import.setOpaque(true);
+        Import.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        Tokenize.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 18)); // NOI18N
-        Tokenize.setText("Tokenize");
+        // ── Tokenize button ──────────────────────────────────────────────────
+        Tokenize.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 14));
+        Tokenize.setText("  Tokenize");
+        Tokenize.setForeground(java.awt.Color.WHITE);
+        Tokenize.setBackground(new java.awt.Color(62, 142, 107));
+        Tokenize.setFocusPainted(false);
+        Tokenize.setBorderPainted(false);
+        Tokenize.setOpaque(true);
+        Tokenize.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        Clear.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 18)); // NOI18N
-        Clear.setText("Clear");
+        // ── Clear button ─────────────────────────────────────────────────────
+        Clear.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 14));
+        Clear.setText("  Clear");
+        Clear.setForeground(java.awt.Color.WHITE);
+        Clear.setBackground(new java.awt.Color(142, 74, 74));
+        Clear.setFocusPainted(false);
+        Clear.setBorderPainted(false);
+        Clear.setOpaque(true);
+        Clear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout TopPanelLayout = new javax.swing.GroupLayout(TopPanel);
         TopPanel.setLayout(TopPanelLayout);
@@ -57,11 +80,11 @@ public class MainGUI extends javax.swing.JFrame {
             TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TopPanelLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(Import, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Tokenize, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Clear, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Import,   javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(Tokenize, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(Clear,    javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         TopPanelLayout.setVerticalGroup(
@@ -69,47 +92,55 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TopPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Clear, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(Import, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Clear,    javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(Import,   javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Tokenize, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        BottomSection.setBackground(new java.awt.Color(204, 203, 212));
-        BottomSection.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 16)); // NOI18N
+        // ── Bottom tabbed pane ────────────────────────────────────────────────
+        BottomSection.setBackground(new java.awt.Color(210, 218, 230));
+        BottomSection.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 16));
 
-        TokenTableTab.setBackground(new java.awt.Color(200, 200, 209));
+        // ── Token Table tab ───────────────────────────────────────────────────
+        TokenTableTab.setBackground(new java.awt.Color(240, 242, 247));
         TokenTableTab.setPreferredSize(new java.awt.Dimension(1880, 300));
 
-        LexemeTable.setBackground(new java.awt.Color(204, 203, 212));
-        LexemeTable.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 12)); // NOI18N
+        // ── Lexeme table: empty, ready for tokenizer to populate ──────────────
+        LexemeTable.setBackground(new java.awt.Color(240, 242, 247));
+        LexemeTable.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 12));
         LexemeTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Lexeme", "Type", "Line", "Count"
-            }
-        ));
+            new Object[][] {},
+            new String[]{ "Lexeme", "Type", "Line", "Count" }
+        ) {
+            @Override public boolean isCellEditable(int r, int c) { return false; }
+        });
+        LexemeTable.setRowHeight(24);
+        LexemeTable.setShowGrid(false);
+        LexemeTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        LexemeTable.setSelectionBackground(new java.awt.Color(74, 111, 165));
+        LexemeTable.setSelectionForeground(java.awt.Color.WHITE);
+        styleTableHeader(LexemeTable);
         LexemeTableScrollPane.setViewportView(LexemeTable);
+        LexemeTableScrollPane.getViewport().setBackground(new java.awt.Color(240, 242, 247));
 
-        UniqueTable.setBackground(new java.awt.Color(204, 203, 212));
-        UniqueTable.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 12)); // NOI18N
+        // ── Unique table: empty, ready for tokenizer to populate ──────────────
+        UniqueTable.setBackground(new java.awt.Color(240, 242, 247));
+        UniqueTable.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 12));
         UniqueTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Unique Identifier", "Total"
-            }
-        ));
+            new Object[][] {},
+            new String[]{ "Unique Identifier", "Total" }
+        ) {
+            @Override public boolean isCellEditable(int r, int c) { return false; }
+        });
+        UniqueTable.setRowHeight(24);
+        UniqueTable.setShowGrid(false);
+        UniqueTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        UniqueTable.setSelectionBackground(new java.awt.Color(74, 111, 165));
+        UniqueTable.setSelectionForeground(java.awt.Color.WHITE);
+        styleTableHeader(UniqueTable);
         UniqueTableScrollPane.setViewportView(UniqueTable);
+        UniqueTableScrollPane.getViewport().setBackground(new java.awt.Color(240, 242, 247));
 
         javax.swing.GroupLayout TokenTableTabLayout = new javax.swing.GroupLayout(TokenTableTab);
         TokenTableTab.setLayout(TokenTableTabLayout);
@@ -132,14 +163,20 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        BottomSection.addTab("Token Table", TokenTableTab);
+        BottomSection.addTab("Token Table",  TokenTableTab);
         BottomSection.addTab("Symbol Table", SymbolTableTab);
 
-        OutputArea.setBackground(new java.awt.Color(222, 223, 227));
-        OutputArea.setFont(new java.awt.Font("Franklin Gothic Book", 1, 18)); // NOI18N
+        // ── Output area button ────────────────────────────────────────────────
+        OutputArea.setBackground(new java.awt.Color(240, 242, 247));
+        OutputArea.setFont(new java.awt.Font("Franklin Gothic Book", 1, 18));
         OutputArea.setText("OUTPUT AREA");
+        OutputArea.setForeground(new java.awt.Color(44, 58, 75));
+        OutputArea.setFocusPainted(false);
+        OutputArea.setBorderPainted(false);
 
-        LS_Editor.setBackground(new java.awt.Color(222, 223, 227));
+        // ── Left editor panel: glass white ────────────────────────────────────
+        LS_Editor.setBackground(new java.awt.Color(245, 247, 252));
+        LS_Editor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 210, 228), 1));
 
         javax.swing.GroupLayout LS_EditorLayout = new javax.swing.GroupLayout(LS_Editor);
         LS_Editor.setLayout(LS_EditorLayout);
@@ -152,8 +189,10 @@ public class MainGUI extends javax.swing.JFrame {
             .addGap(0, 1480, Short.MAX_VALUE)
         );
 
-        RS_Tokens.setBackground(new java.awt.Color(222, 223, 227));
+        // ── Right stat panels: glass white ────────────────────────────────────
+        RS_Tokens.setBackground(new java.awt.Color(245, 247, 252));
         RS_Tokens.setPreferredSize(new java.awt.Dimension(398, 200));
+        RS_Tokens.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 210, 228), 1));
 
         javax.swing.GroupLayout RS_TokensLayout = new javax.swing.GroupLayout(RS_Tokens);
         RS_Tokens.setLayout(RS_TokensLayout);
@@ -166,8 +205,9 @@ public class MainGUI extends javax.swing.JFrame {
             .addGap(0, 107, Short.MAX_VALUE)
         );
 
-        RS_Unique.setBackground(new java.awt.Color(222, 223, 227));
+        RS_Unique.setBackground(new java.awt.Color(245, 247, 252));
         RS_Unique.setPreferredSize(new java.awt.Dimension(398, 200));
+        RS_Unique.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 210, 228), 1));
 
         javax.swing.GroupLayout RS_UniqueLayout = new javax.swing.GroupLayout(RS_Unique);
         RS_Unique.setLayout(RS_UniqueLayout);
@@ -180,8 +220,9 @@ public class MainGUI extends javax.swing.JFrame {
             .addGap(0, 107, Short.MAX_VALUE)
         );
 
-        RS_Error.setBackground(new java.awt.Color(222, 223, 227));
+        RS_Error.setBackground(new java.awt.Color(245, 247, 252));
         RS_Error.setPreferredSize(new java.awt.Dimension(398, 200));
+        RS_Error.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 210, 228), 1));
 
         javax.swing.GroupLayout RS_ErrorLayout = new javax.swing.GroupLayout(RS_Error);
         RS_Error.setLayout(RS_ErrorLayout);
@@ -194,6 +235,7 @@ public class MainGUI extends javax.swing.JFrame {
             .addGap(0, 107, Short.MAX_VALUE)
         );
 
+        // ── Main panel layout (structure unchanged) ───────────────────────────
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
         MainPanelLayout.setHorizontalGroup(
@@ -207,10 +249,10 @@ public class MainGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(RS_Tokens, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
-                            .addComponent(RS_Error, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                            .addComponent(RS_Error,  javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                             .addComponent(RS_Unique, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)))
                     .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(OutputArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(OutputArea,    javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BottomSection, javax.swing.GroupLayout.DEFAULT_SIZE, 1510, Short.MAX_VALUE)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -227,10 +269,10 @@ public class MainGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(RS_Unique, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(RS_Error, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(RS_Error,  javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(OutputArea, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(OutputArea,    javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BottomSection, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13))
@@ -250,13 +292,22 @@ public class MainGUI extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>
+
+    /** Applies Soft Glass header styling to a table. */
+    private void styleTableHeader(javax.swing.JTable table) {
+        javax.swing.table.JTableHeader header = table.getTableHeader();
+        header.setFont(new java.awt.Font("Franklin Gothic Medium", java.awt.Font.PLAIN, 12));
+        header.setBackground(new java.awt.Color(216, 222, 233));
+        header.setForeground(new java.awt.Color(44, 58, 75));
+        header.setReorderingAllowed(false);
+        header.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(200, 208, 222)));
+    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -271,21 +322,22 @@ public class MainGUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new MainGUI().setVisible(true));
     }
 
+    // ── Variable declarations ─────────────────────────────────────────────────
     private javax.swing.JTabbedPane BottomSection;
-    private javax.swing.JLabel Clear;
-    private javax.swing.JLabel Import;
-    private javax.swing.JPanel LS_Editor;
-    private javax.swing.JTable LexemeTable;
+    private javax.swing.JButton     Clear;        // was JLabel
+    private javax.swing.JButton     Import;       // was JLabel
+    private javax.swing.JPanel      LS_Editor;
+    private javax.swing.JTable      LexemeTable;
     private javax.swing.JScrollPane LexemeTableScrollPane;
-    private javax.swing.JPanel MainPanel;
-    private javax.swing.JButton OutputArea;
-    private javax.swing.JPanel RS_Error;
-    private javax.swing.JPanel RS_Tokens;
-    private javax.swing.JPanel RS_Unique;
+    private javax.swing.JPanel      MainPanel;
+    private javax.swing.JButton     OutputArea;
+    private javax.swing.JPanel      RS_Error;
+    private javax.swing.JPanel      RS_Tokens;
+    private javax.swing.JPanel      RS_Unique;
     private javax.swing.JTabbedPane SymbolTableTab;
-    private javax.swing.JPanel TokenTableTab;
-    private javax.swing.JLabel Tokenize;
-    private javax.swing.JPanel TopPanel;
-    private javax.swing.JTable UniqueTable;
+    private javax.swing.JPanel      TokenTableTab;
+    private javax.swing.JButton     Tokenize;     // was JLabel
+    private javax.swing.JPanel      TopPanel;
+    private javax.swing.JTable      UniqueTable;
     private javax.swing.JScrollPane UniqueTableScrollPane;
 }
