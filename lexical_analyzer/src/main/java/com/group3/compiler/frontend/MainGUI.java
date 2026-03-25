@@ -11,9 +11,22 @@ public class MainGUI extends javax.swing.JFrame {
 
     public MainGUI() {
         initComponents();
+
+        //For text input and paste area
+        CodeInputArea = new javax.swing.JTextArea();
+        CodeInputArea.setFont(new java.awt.Font("Monospaced", 0, 16));
+        CodeInputArea.setBackground(new java.awt.Color(245, 247, 252));
+        CodeInputArea.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        
+        javax.swing.JScrollPane scroll = new javax.swing.JScrollPane(CodeInputArea);
+        scroll.setBorder(null);
+        scroll.setPreferredSize(new java.awt.Dimension(1050, 600)); 
+        
+        LS_Editor.setLayout(new java.awt.BorderLayout());
+        LS_Editor.add(scroll, java.awt.BorderLayout.CENTER);
+        LS_Editor.revalidate();
     }
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
@@ -369,4 +382,5 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel      TopPanel;
     private javax.swing.JTable      UniqueTable;
     private javax.swing.JScrollPane UniqueTableScrollPane;
+    private javax.swing.JTextArea   CodeInputArea;
 }
