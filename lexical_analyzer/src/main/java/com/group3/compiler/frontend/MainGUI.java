@@ -19,9 +19,9 @@ public class MainGUI extends javax.swing.JFrame {
 
         MainPanel             = new javax.swing.JPanel();
         TopPanel              = new javax.swing.JPanel();
-        Import                = new javax.swing.JButton();   // was JLabel
-        Tokenize              = new javax.swing.JButton();   // was JLabel
-        Clear                 = new javax.swing.JButton();   // was JLabel
+        Import                = new javax.swing.JButton();
+        Tokenize              = new javax.swing.JButton();
+        Clear                 = new javax.swing.JButton();
         BottomSection         = new javax.swing.JTabbedPane();
         TokenTableTab         = new javax.swing.JPanel();
         LexemeTableScrollPane = new javax.swing.JScrollPane();
@@ -44,35 +44,41 @@ public class MainGUI extends javax.swing.JFrame {
         TopPanel.setBackground(new java.awt.Color(90, 106, 126));     // #5A6A7E
         TopPanel.setPreferredSize(new java.awt.Dimension(1920, 70));
 
-        // ── Import button ────────────────────────────────────────────────────
-        Import.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 14));
-        Import.setText("  Import File");
+        // ── Import button (📥 icon + label) ─────────────────────────────────
+        Import.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14));
+        Import.setText("\uD83D\uDCE5  Import File");   // 📥
         Import.setForeground(java.awt.Color.WHITE);
         Import.setBackground(new java.awt.Color(74, 111, 165));
         Import.setFocusPainted(false);
         Import.setBorderPainted(false);
         Import.setOpaque(true);
         Import.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Import.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Import.setIconTextGap(6);
 
-        // ── Tokenize button ──────────────────────────────────────────────────
-        Tokenize.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 14));
-        Tokenize.setText("  Tokenize");
+        // ── Tokenize button (▶ icon + label) ────────────────────────────────
+        Tokenize.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14));
+        Tokenize.setText("\u25B6  Tokenize");          // ▶
         Tokenize.setForeground(java.awt.Color.WHITE);
         Tokenize.setBackground(new java.awt.Color(62, 142, 107));
         Tokenize.setFocusPainted(false);
         Tokenize.setBorderPainted(false);
         Tokenize.setOpaque(true);
         Tokenize.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Tokenize.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Tokenize.setIconTextGap(6);
 
-        // ── Clear button ─────────────────────────────────────────────────────
-        Clear.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 14));
-        Clear.setText("  Clear");
+        // ── Clear button (🗑 icon + label) ───────────────────────────────────
+        Clear.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14));
+        Clear.setText("\uD83D\uDDD1  Clear");           // 🗑
         Clear.setForeground(java.awt.Color.WHITE);
         Clear.setBackground(new java.awt.Color(142, 74, 74));
         Clear.setFocusPainted(false);
         Clear.setBorderPainted(false);
         Clear.setOpaque(true);
         Clear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Clear.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Clear.setIconTextGap(6);
 
         javax.swing.GroupLayout TopPanelLayout = new javax.swing.GroupLayout(TopPanel);
         TopPanel.setLayout(TopPanelLayout);
@@ -106,7 +112,7 @@ public class MainGUI extends javax.swing.JFrame {
         TokenTableTab.setBackground(new java.awt.Color(240, 242, 247));
         TokenTableTab.setPreferredSize(new java.awt.Dimension(1880, 300));
 
-        // ── Lexeme table: empty, ready for tokenizer to populate ──────────────
+        // ── Lexeme table ──────────────────────────────────────────────────────
         LexemeTable.setBackground(new java.awt.Color(240, 242, 247));
         LexemeTable.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 12));
         LexemeTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -124,7 +130,7 @@ public class MainGUI extends javax.swing.JFrame {
         LexemeTableScrollPane.setViewportView(LexemeTable);
         LexemeTableScrollPane.getViewport().setBackground(new java.awt.Color(240, 242, 247));
 
-        // ── Unique table: empty, ready for tokenizer to populate ──────────────
+        // ── Unique table ──────────────────────────────────────────────────────
         UniqueTable.setBackground(new java.awt.Color(240, 242, 247));
         UniqueTable.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 12));
         UniqueTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -189,10 +195,12 @@ public class MainGUI extends javax.swing.JFrame {
             .addGap(0, 1480, Short.MAX_VALUE)
         );
 
-        // ── Right stat panels: glass white ────────────────────────────────────
+        // ── Right stat panels with titled borders (icon + label) ──────────────
+
+        // Total Tokens panel — 🔢 icon
         RS_Tokens.setBackground(new java.awt.Color(245, 247, 252));
         RS_Tokens.setPreferredSize(new java.awt.Dimension(398, 200));
-        RS_Tokens.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 210, 228), 1));
+        RS_Tokens.setBorder(makeSidebarBorder("\uD83D\uDD22  Total Tokens"));   // 🔢
 
         javax.swing.GroupLayout RS_TokensLayout = new javax.swing.GroupLayout(RS_Tokens);
         RS_Tokens.setLayout(RS_TokensLayout);
@@ -205,9 +213,10 @@ public class MainGUI extends javax.swing.JFrame {
             .addGap(0, 107, Short.MAX_VALUE)
         );
 
+        // Unique Identifiers panel — 🔑 icon
         RS_Unique.setBackground(new java.awt.Color(245, 247, 252));
         RS_Unique.setPreferredSize(new java.awt.Dimension(398, 200));
-        RS_Unique.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 210, 228), 1));
+        RS_Unique.setBorder(makeSidebarBorder("\uD83D\uDD11  Unique Identifiers"));  // 🔑
 
         javax.swing.GroupLayout RS_UniqueLayout = new javax.swing.GroupLayout(RS_Unique);
         RS_Unique.setLayout(RS_UniqueLayout);
@@ -220,9 +229,10 @@ public class MainGUI extends javax.swing.JFrame {
             .addGap(0, 107, Short.MAX_VALUE)
         );
 
+        // Error Count panel — ⚠ icon
         RS_Error.setBackground(new java.awt.Color(245, 247, 252));
         RS_Error.setPreferredSize(new java.awt.Dimension(398, 200));
-        RS_Error.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 210, 228), 1));
+        RS_Error.setBorder(makeSidebarBorder("\u26A0  Error Count"));   // ⚠
 
         javax.swing.GroupLayout RS_ErrorLayout = new javax.swing.GroupLayout(RS_Error);
         RS_Error.setLayout(RS_ErrorLayout);
@@ -294,6 +304,25 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
+    /**
+     * Creates a styled titled border for sidebar stat panels.
+     * Displays an emoji icon + label in the Soft Glass palette.
+     *
+     * @param title  Text to show (include emoji prefix, e.g. "🔢  Total Tokens")
+     * @return       A compound border: titled outer + line inner
+     */
+    private javax.swing.border.Border makeSidebarBorder(String title) {
+        javax.swing.border.TitledBorder titled = javax.swing.BorderFactory.createTitledBorder(
+            javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 210, 228), 1),
+            title
+        );
+        titled.setTitleFont(new java.awt.Font("Segoe UI Symbol", java.awt.Font.BOLD, 13));
+        titled.setTitleColor(new java.awt.Color(44, 58, 75));
+        titled.setTitleJustification(javax.swing.border.TitledBorder.LEFT);
+        titled.setTitlePosition(javax.swing.border.TitledBorder.TOP);
+        return titled;
+    }
+
     /** Applies Soft Glass header styling to a table. */
     private void styleTableHeader(javax.swing.JTable table) {
         javax.swing.table.JTableHeader header = table.getTableHeader();
@@ -324,8 +353,8 @@ public class MainGUI extends javax.swing.JFrame {
 
     // ── Variable declarations ─────────────────────────────────────────────────
     private javax.swing.JTabbedPane BottomSection;
-    private javax.swing.JButton     Clear;        // was JLabel
-    private javax.swing.JButton     Import;       // was JLabel
+    private javax.swing.JButton     Clear;
+    private javax.swing.JButton     Import;
     private javax.swing.JPanel      LS_Editor;
     private javax.swing.JTable      LexemeTable;
     private javax.swing.JScrollPane LexemeTableScrollPane;
@@ -336,7 +365,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel      RS_Unique;
     private javax.swing.JTabbedPane SymbolTableTab;
     private javax.swing.JPanel      TokenTableTab;
-    private javax.swing.JButton     Tokenize;     // was JLabel
+    private javax.swing.JButton     Tokenize;
     private javax.swing.JPanel      TopPanel;
     private javax.swing.JTable      UniqueTable;
     private javax.swing.JScrollPane UniqueTableScrollPane;
