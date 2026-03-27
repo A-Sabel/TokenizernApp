@@ -1,17 +1,16 @@
 package com.group3.compiler.backend;
 
-/* SINGLETON CLASS: Symbol Table Manager
-Description: A centralized repository (HashMap) for identifiers and their occurrences.
-Member Note: "Use this to store 'lexeme' as the key and 'count' as the value. 
-    Required for the GUI requirement of tracking how many times a variable appears." */
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-    
+
+/* SINGLETON CLASS: Symbol Table Manager
+Description: A centralized repository (HashMap) for identifiers and their occurrences.
+Member Note: "Use this to store 'lexeme' as the key and 'count' as the value.
+    Required for the GUI requirement of tracking how many times a variable appears." */
+
 public class SymbolTable {
     private static final HashSet<String> KEYWORDS = new HashSet<>(Arrays.asList(
-        // Reference from Java Keywords List
         // 1. ACCESS MODIFIERS
         "public", "private", "protected",
         // 2. CLASS / INTERFACE DECLARATIONS
@@ -37,29 +36,32 @@ public class SymbolTable {
     ));
 
     // Key = Lexeme (Identifier), Value = Count of Occurrences
-    @SuppressWarnings("FieldMayBeFinal")
     private HashMap<String, Integer> identifierCounts;
-    // Private Constructor
-    private SymbolTable() { identifierCounts = new HashMap<>();}
 
-    // Singleton Instance
-    private static SymbolTable instance;
-    // Get the singleton instance
+    // Private Constructor
+    private SymbolTable() {
+        identifierCounts = new HashMap<>();
+    }
+
+    // FIX: Eager initialization — thread-safe without synchronization overhead
+    private static final SymbolTable instance = new SymbolTable();
+
     public static SymbolTable getInstance() {
-        if (instance == null) {
-            instance = new SymbolTable();
-        }
         return instance;
     }
 
-    public boolean isKeyword(String lexeme) { return KEYWORDS.contains(lexeme); }
+    public boolean isKeyword(String lexeme)    { return KEYWORDS.contains(lexeme); }
+
     public void registerIdentifier(String lexeme) {
         if (!isKeyword(lexeme)) {
             identifierCounts.put(lexeme, identifierCounts.getOrDefault(lexeme, 0) + 1);
         }
     }
-    public int getIdentifierCount(String lexeme) { return identifierCounts.getOrDefault(lexeme, 0); }
-    public void reset() { identifierCounts.clear(); }
-    public HashMap<String, Integer> getAllIdentifiers() { return identifierCounts; }
 
+    public int getIdentifierCount(String lexeme) {
+        return identifierCounts.getOrDefault(lexeme, 0);
+    }
+
+    public void reset()                              { identifierCounts.clear(); }
+    public HashMap<String, Integer> getAllIdentifiers() { return identifierCounts; }
 }

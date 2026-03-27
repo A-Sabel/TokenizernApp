@@ -2,8 +2,8 @@ package com.group3.compiler.backend.models;
 
 /* ABSTRACT CLASS
 Description: The base blueprint for every piece of code identified.
-Member Note: “Do not instantiate this directly. All new token types must extend this. 
-    Contains common fields: lexeme, type, line, and column.” */
+Member Note: "Do not instantiate this directly. All new token types must extend this.
+    Contains common fields: lexeme, type, line, and column." */
 
 public abstract class Tokens {
     protected String lexeme; // The actual text of the token
@@ -12,22 +12,22 @@ public abstract class Tokens {
     protected int column;    // Column number where the token starts
 
     // Constructor
-    public Tokens (String lexeme, String type, int line, int column) {
+    public Tokens(String lexeme, String type, int line, int column) {
         this.lexeme = lexeme;
-        this.type = type;
-        this.line = line;
+        this.type   = type;
+        this.line   = line;
         this.column = column;
     }
 
     // Getters
     public String getLexeme() { return lexeme; }
-    public String getType() { return type; }
-    public int getLine() { return line; }
-    public int getColumn() { return column; }
+    public String getType()   { return type; }
+    public int    getLine()   { return line; }
+    public int    getColumn() { return column; }
 
-    // toString method for easy debugging and display
+    // FIX: Now includes column for easier debugging
     @Override
     public String toString() {
-        return String.format("[%s] Lexeme: %s | Line: %d", type, lexeme, line);
+        return String.format("[%s] '%s' | Line: %d, Col: %d", type, lexeme, line, column);
     }
 }
