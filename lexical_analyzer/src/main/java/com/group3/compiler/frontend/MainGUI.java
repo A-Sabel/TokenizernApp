@@ -56,6 +56,7 @@ public class MainGUI extends JFrame {
         resultTable = new ResultTable();
         LexemeTableScrollPane.setViewportView(resultTable.getLexemeTable());
         UniqueTableScrollPane.setViewportView(resultTable.getUniqueTable());
+        SymbolTableTab.add(resultTable.getRegexScrollPane(), BorderLayout.CENTER);
 
         // FIX: Add big centered count labels into stat panels
         tokenCountLabel  = makeBigLabel();
@@ -219,7 +220,7 @@ public class MainGUI extends JFrame {
         LexemeTable           = new JTable();
         UniqueTableScrollPane = new JScrollPane();
         UniqueTable           = new JTable();
-        SymbolTableTab        = new JTabbedPane();
+        SymbolTableTab        = new JPanel();
         OutputArea            = new JButton();
         LS_Editor             = new JPanel();
         RS_Tokens             = new JPanel();
@@ -326,6 +327,16 @@ public class MainGUI extends JFrame {
                     .addComponent(LexemeTableScrollPane, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        SymbolTableTab.setLayout(new BorderLayout());
+        SymbolTableTab.setBackground(new Color(240, 242, 247));
+        SymbolTableTab.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Column headers for initialization placeholder
+        UniqueTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object[][]{}, new String[]{ "Category", "Count" }
+        ) { public boolean isCellEditable(int r, int c) { return false; } });
+        UniqueTable.setRowHeight(24);
 
         BottomSection.addTab("Token Table",  TokenTableTab);
         BottomSection.addTab("Symbol Table", SymbolTableTab);
@@ -482,7 +493,7 @@ public class MainGUI extends JFrame {
     private JPanel      RS_Error;
     private JPanel      RS_Tokens;
     private JPanel      RS_Unique;
-    private JTabbedPane SymbolTableTab;
+    private JPanel      SymbolTableTab;
     private JPanel      TokenTableTab;
     private JButton     Tokenize;
     private JPanel      TopPanel;

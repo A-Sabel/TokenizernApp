@@ -53,15 +53,19 @@
         // ── Column definitions ────────────────────────────────────────────────────
         private static final String[] LEXEME_COLUMNS = { "Lexeme", "Category", "Line", "Col", "Occurrences" };
         private static final String[] UNIQUE_COLUMNS = { "Category", "Count" };
+    private static final String[] REGEX_COLUMNS  = { "Regular Expression", "Token", "Attribute-Value" };
 
         // ── Components ────────────────────────────────────────────────────────────
         private final JTable      lexemeTable;
         private final JTable      uniqueTable;
+    private final JTable      regexTable;
         private final JScrollPane lexemeScrollPane;
         private final JScrollPane uniqueScrollPane;
+    private final JScrollPane regexScrollPane;
 
         private final DefaultTableModel lexemeModel;
         private final DefaultTableModel uniqueModel;
+    private final DefaultTableModel regexModel;
 
         // =========================================================================
         //  Constructor
@@ -70,15 +74,20 @@
         public ResultTable() {
             lexemeModel = buildModel(LEXEME_COLUMNS);
             uniqueModel = buildModel(UNIQUE_COLUMNS);
+            regexModel  = buildModel(REGEX_COLUMNS);
 
             lexemeTable = buildTable(lexemeModel);
             uniqueTable = buildTable(uniqueModel);
+            regexTable  = buildTable(regexModel);
 
             // Column widths for LexemeTable
             setColumnWidths(lexemeTable, new int[]{ 200, 180, 60, 60, 100 });
-
             // Column widths for UniqueTable
             setColumnWidths(uniqueTable, new int[]{ 200, 80 });
+            // Column widths for RegexTable
+            setColumnWidths(regexTable, new int[]{ 300, 150, 250 });
+
+            regexScrollPane = buildScrollPane(regexTable);
 
             lexemeScrollPane = buildScrollPane(lexemeTable);
             uniqueScrollPane = buildScrollPane(uniqueTable);
@@ -119,12 +128,50 @@
             for (Map.Entry<String, Integer> entry : categoryCounts.entrySet()) {
                 uniqueModel.addRow(new Object[]{ entry.getKey(), entry.getValue() });
             }
+
+            // ── RegexTable ────────────────────────────────────────────────────────
+            regexModel.setRowCount(0);
+            for (Tokens t : tokenStream) {
+                String category = t.getClass().getSimpleName().toLowerCase();
+                String lexeme   = t.getLexeme();
+                String attr     = getAttributeValue(t);
+
+                regexModel.addRow(new Object[]{
+                    category,
+                    lexeme,
+                    attr
+                });
+            }
+        }
+
+        private String getAttributeValue(Tokens t) {
+            String category = t.getClass().getSimpleName().toUpperCase();
+            String lexeme   = t.getLexeme();
+
+            return switch (category) {
+                case "IDENTIFIER"   -> "Symbol Table Pointer: " + Integer.toHexString(System.identityHashCode(lexeme)).toUpperCase();
+                case "CONSTANT"     -> "Numeric Value: " + lexeme;
+                case "LITERAL"      -> lexeme.startsWith("'") ? "Char Literal" : "String Literal";
+                case "OPERATOR"     -> getOperatorType(lexeme);
+                case "PUNCTUATION"  -> "-";
+                case "KEYWORD"      -> "-";
+                default             -> "-";
+            };
+        }
+
+        private String getOperatorType(String op) {
+            if (op.matches("[+\\-*/%]")) return "Arithmetic Operator";
+            if (op.matches("==|!=|<|>|<=|>=")) return "Relational Operator";
+            if (op.matches("&&|\\|\\||!")) return "Logical Operator";
+            if (op.matches("=|\\+=|-=|\\*=|/=")) return "Assignment Operator";
+            return "Special Operator";
         }
 
         /** Clears both tables (called by the Clear button). */
         public void clear() {
             lexemeModel.setRowCount(0);
             uniqueModel.setRowCount(0);
+            regexModel.setRowCount(0);
         }
 
         // ── Getters ───────────────────────────────────────────────────────────────
@@ -135,11 +182,34 @@
         /** Raw JTable — pass to UniqueTableScrollPane.setViewportView() in MainGUI. */
         public JTable getUniqueTable()          { return uniqueTable; }
 
+        /** Raw JTable for the Regex analysis. */
+        public JTable getRegexTable()           { return regexTable; }
+
         /** Ready-made scroll pane containing the LexemeTable. */
         public JScrollPane getLexemeScrollPane() { return lexemeScrollPane; }
 
         /** Ready-made scroll pane containing the UniqueTable. */
         public JScrollPane getUniqueScrollPane() { return uniqueScrollPane; }
+
+        /** Ready-made scroll pane containing the RegexTable. */
+        public JScrollPane getRegexScrollPane()  { return regexScrollPane; }
+
+        // =========================================================================
+        //  PRIVATE HELPERS
+        // =========================================================================
+
+        private String getRegexFor(String category, String lexeme) {
+            switch (category) {
+                case "KEYWORD":      return lexeme; // Keywords match exactly
+                case "IDENTIFIER":   return "[a-zA-Z_][a-zA-Z0-9_]*";
+                case "CONSTANT":     return "[0-9]+(\\.[0-9]+)?";
+                case "LITERAL":      return "\\\"([^\\\"\\\\\\\\]|\\\\\\\\.)*\\\"";
+                case "OPERATOR":     return "[\\+\\-\\*/%&|<>!=]=?|\\.\\.\\.|::";
+                case "PUNCTUATION":  return "[;,\\.]";
+                case "SPECIAL_CHAR": return "[\\(\\)\\{\\}\\[\\]@]";
+                default:             return ".*";
+            }
+        }
 
         // =========================================================================
         //  PRIVATE BUILDERS
@@ -154,7 +224,9 @@
                 // Right-align numeric columns (Line, Col, Occurrences / Count)
                 @Override
                 public Class<?> getColumnClass(int col) {
-                    if (col >= 2) return Integer.class;   // Line / Col / Occurrences / Count
+                    String name = getColumnName(col);
+                    if (name.equals("Line") || name.equals("Col") || 
+                        name.equals("Occurrences") || name.equals("Count")) return Integer.class;
                     return String.class;
                 }
             };
@@ -215,8 +287,10 @@
             leftAlign.setHorizontalAlignment(SwingConstants.LEFT);
 
             for (int i = 0; i < table.getColumnCount(); i++) {
+                Class<?> colClass = table.getModel().getColumnClass(i);
+                boolean isNumeric = colClass == Integer.class;
                 table.getColumnModel().getColumn(i)
-                        .setCellRenderer(i >= 2 ? rightAlign : leftAlign);
+                        .setCellRenderer(isNumeric ? rightAlign : leftAlign);
             }
         }
 
