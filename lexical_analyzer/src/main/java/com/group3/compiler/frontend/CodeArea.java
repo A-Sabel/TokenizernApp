@@ -30,9 +30,13 @@
                     }
                 }
                 // Other methods (dragEnter, dragExit, etc.) can be left empty
+                @Override
                 public void dragEnter(DropTargetDragEvent dtde) {}
+                @Override
                 public void dragOver(DropTargetDragEvent dtde) {}
+                @Override
                 public void dropActionChanged(DropTargetDragEvent dtde) {}
+                @Override
                 public void dragExit(DropTargetEvent dte) {}
             });
         }

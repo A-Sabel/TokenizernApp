@@ -61,7 +61,7 @@
     private final JTable      regexTable;
         private final JScrollPane lexemeScrollPane;
         private final JScrollPane uniqueScrollPane;
-    private final JScrollPane regexScrollPane;
+        private final JScrollPane regexScrollPane;
 
         private final DefaultTableModel lexemeModel;
         private final DefaultTableModel uniqueModel;
@@ -198,18 +198,6 @@
         //  PRIVATE HELPERS
         // =========================================================================
 
-        private String getRegexFor(String category, String lexeme) {
-            switch (category) {
-                case "KEYWORD":      return lexeme; // Keywords match exactly
-                case "IDENTIFIER":   return "[a-zA-Z_][a-zA-Z0-9_]*";
-                case "CONSTANT":     return "[0-9]+(\\.[0-9]+)?";
-                case "LITERAL":      return "\\\"([^\\\"\\\\\\\\]|\\\\\\\\.)*\\\"";
-                case "OPERATOR":     return "[\\+\\-\\*/%&|<>!=]=?|\\.\\.\\.|::";
-                case "PUNCTUATION":  return "[;,\\.]";
-                case "SPECIAL_CHAR": return "[\\(\\)\\{\\}\\[\\]@]";
-                default:             return ".*";
-            }
-        }
 
         // =========================================================================
         //  PRIVATE BUILDERS
