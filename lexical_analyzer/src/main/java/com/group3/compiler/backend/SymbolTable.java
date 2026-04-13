@@ -11,6 +11,7 @@ Member Note: "Use this to store 'lexeme' as the key and 'count' as the value.
 
 public class SymbolTable {
     private static final HashSet<String> KEYWORDS = new HashSet<>(Arrays.asList(
+        // Based on JAVA 17 Keywords (https://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html)
         // 1. ACCESS MODIFIERS
         "public", "private", "protected",
         // 2. CLASS / INTERFACE DECLARATIONS

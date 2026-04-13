@@ -25,7 +25,6 @@ public abstract class Tokens {
     public int    getLine()   { return line; }
     public int    getColumn() { return column; }
 
-    // FIX: Now includes column for easier debugging
     @Override
     public String toString() {
         return String.format("[%s] '%s' | Line: %d, Col: %d", type, lexeme, line, column);
