@@ -36,14 +36,13 @@ public class SymbolTable {
     ));
 
     // Key = Lexeme (Identifier), Value = Count of Occurrences
-    private HashMap<String, Integer> identifierCounts;
+    private final HashMap<String, Integer> identifierCounts;
 
     // Private Constructor
     private SymbolTable() {
         identifierCounts = new HashMap<>();
     }
 
-    // FIX: Eager initialization — thread-safe without synchronization overhead
     private static final SymbolTable instance = new SymbolTable();
 
     public static SymbolTable getInstance() {

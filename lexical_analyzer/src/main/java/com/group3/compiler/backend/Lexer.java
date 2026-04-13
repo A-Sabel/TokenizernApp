@@ -60,7 +60,7 @@
                     continue;
                 }
 
-                // DFA Braches for Token Categories
+                // DFA Branches for Token Categories
                 if (CharMatcher.isAlpha(current)) { processAlpha(); } // State 1, 2, 3
                 else if (CharMatcher.isDigit(current)) { processNumeric(); } // State 4, 6, 7
                 else if (CharMatcher.isQuote(current)) { processLiteral(); } // State 8, 9
@@ -96,8 +96,7 @@
             }
         }
 
-        // Handles: /* This is a 
-        //             multi-line comment */
+        // Handles: /* This is a multi-line comment */
         private void skipMultiLineComment() {
             advance(); // Consume the '/'
             advance(); // Consume the '*'
@@ -140,7 +139,6 @@
             }
             String lexeme = sb.toString();
             String category = SymbolTable.getInstance().isKeyword(lexeme) ? "KEYWORD" : "IDENTIFIER";
-            // Pass startCol instead of relying on the modified col
             tokens.add(Tokenfactory.createToken(lexeme, category, line, startCol));
             if (category.equals("IDENTIFIER")) {
                 SymbolTable.getInstance().registerIdentifier(lexeme);

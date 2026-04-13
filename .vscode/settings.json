@@ -1,4 +1,16 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
-    "java.server.launchMode": "Standard"
+    "java.server.launchMode": "Standard",
+    "cSpell.words": [
+        "dtde",
+        "errorlevel",
+        "JAVAC",
+        "Popout",
+        "Segoe",
+        "setlocal",
+        "SPECIALCHAR",
+        "Tokenfactory",
+        "udccb",
+        "unwired"
+    ]
 }

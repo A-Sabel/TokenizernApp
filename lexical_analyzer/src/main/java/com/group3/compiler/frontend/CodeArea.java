@@ -1,10 +1,20 @@
     package com.group3.compiler.frontend;
 
-    import javax.swing.*;
-    import java.awt.dnd.*;
-    import java.awt.datatransfer.*;
-    import java.io.*;
-    import java.util.List;
+    import java.awt.datatransfer.DataFlavor;
+    import java.awt.datatransfer.UnsupportedFlavorException;
+    import java.awt.dnd.DnDConstants;
+    import java.awt.dnd.DropTarget;
+    import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+
+import javax.swing.JTextArea;
 
     public class CodeArea extends JTextArea {
         public CodeArea() {
@@ -25,7 +35,7 @@
                         File file = droppedFiles.get(0);
                         BufferedReader reader = new BufferedReader(new FileReader(file));
                         read(reader, null);
-                    } catch (Exception e) {
+                    } catch (UnsupportedFlavorException | IOException e) {
                         e.printStackTrace();
                     }
                 }

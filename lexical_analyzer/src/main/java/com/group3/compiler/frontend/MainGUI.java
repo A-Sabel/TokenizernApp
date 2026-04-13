@@ -47,12 +47,6 @@ import com.group3.compiler.backend.models.Tokens;
 
 /* VIEW CLASS: Main Application Window
 Description: The primary JFrame holding the Input, Output, and Stats panels.
-Fixes applied:
-  - CodeInputArea initialized as CodeArea (drag-and-drop enabled)
-  - Import button wired up with JFileChooser
-  - ResultTable integrated (replaces inline updateOutputTables)
-  - RS_Tokens, RS_Unique, RS_Error show big centered live counts
-  - Error list displayed inside RS_Error panel after tokenizing
 */
 public class MainGUI extends JFrame {
 
@@ -60,12 +54,12 @@ public class MainGUI extends JFrame {
             java.util.logging.Logger.getLogger(MainGUI.class.getName());
 
     // ── Stat panel labels (updated after each tokenize run) ──────────────────
-    private JLabel tokenCountLabel;
-    private JLabel uniqueCountLabel;
-    private JLabel errorCountLabel;
-    private JLabel executionTimeLabel;
+    private final JLabel tokenCountLabel;
+    private final JLabel uniqueCountLabel;
+    private final JLabel errorCountLabel;
+    private final JLabel executionTimeLabel;
     // Error detail list shown inside RS_Error
-    private JTextArea errorDetailArea;
+    private final JTextArea errorDetailArea;
 
     // ResultTable replaces the old inline table logic
     private final ResultTable resultTable;
@@ -163,9 +157,9 @@ public class MainGUI extends JFrame {
     // ── Filter Setup and Application ──────────────────────────────────────
     private void setupTableFiltering() {
         JTable visibleLexemeTable = resultTable.getLexemeTable();
-        if (visibleLexemeTable.getModel() instanceof javax.swing.table.DefaultTableModel) {
+        if (visibleLexemeTable.getModel() instanceof javax.swing.table.DefaultTableModel defaultTableModel) {
             lexemeRowSorter = new javax.swing.table.TableRowSorter<>(
-                (javax.swing.table.DefaultTableModel) visibleLexemeTable.getModel());
+                defaultTableModel);
             visibleLexemeTable.setRowSorter(lexemeRowSorter);
         }
     }
@@ -558,7 +552,8 @@ public class MainGUI extends JFrame {
         // LexemeTable and UniqueTable are placeholders; ResultTable replaces their content
         LexemeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object[][]{}, new String[]{ "Lexeme", "Category", "Line", "Col", "Occurrences" }
-        ) { public boolean isCellEditable(int r, int c) { return false; } });
+        ) {@Override
+            public boolean isCellEditable(int r, int c) { return false; } });
         LexemeTable.setRowHeight(24);
         LexemeTable.setShowGrid(false);
         styleTableHeader(LexemeTable);
@@ -566,7 +561,8 @@ public class MainGUI extends JFrame {
 
         UniqueTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object[][]{}, new String[]{ "Category", "Count" }
-        ) { public boolean isCellEditable(int r, int c) { return false; } });
+        ) {@Override
+            public boolean isCellEditable(int r, int c) { return false; } });
         UniqueTable.setRowHeight(24);
         UniqueTable.setShowGrid(false);
         styleTableHeader(UniqueTable);
@@ -612,7 +608,8 @@ public class MainGUI extends JFrame {
         // Column headers for initialization placeholder
         UniqueTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object[][]{}, new String[]{ "Category", "Count" }
-        ) { public boolean isCellEditable(int r, int c) { return false; } });
+        ) {@Override
+            public boolean isCellEditable(int r, int c) { return false; } });
         UniqueTable.setRowHeight(24);
 
         BottomSection.addTab("Token Table",  TokenTableTab);
@@ -801,5 +798,5 @@ public class MainGUI extends JFrame {
     private JPanel      TopPanel;
     private JTable      UniqueTable;
     private JScrollPane UniqueTableScrollPane;
-    private JTextArea   CodeInputArea; // Assigned to CodeArea in constructor
+    private final JTextArea   CodeInputArea;
 }
